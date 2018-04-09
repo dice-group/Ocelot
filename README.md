@@ -6,13 +6,13 @@ Example: "Is Michelle Obama the wife of Barack Obama?"
 
 Request FOX with CURL:
 
-```
+```bash
 curl -d '{"input" : "Is Michelle Obama the wife of Barack Obama?","type": "text","task": "re","output": "turtle","lang": "en"}' -H "Content-Type:application/json;charset=utf-8" http://fox-demo.aksw.org/fox
 ```
 
 Response in TURTLE:
 
-```
+```turtle
 @prefix dbo:   <http://dbpedia.org/ontology/> .
 @prefix foxo:  <http://ns.aksw.org/fox/ontology#> .
 @prefix schema: <http://schema.org/> .
@@ -35,6 +35,7 @@ foxr:1523262029418  a  oa:Annotation , rdf:Statement , foxo:Relation ;
         oa:hasTarget   [ a             oa:SpecificResource ;
                          oa:hasSource  <http://ns.aksw.org/fox/demo/document-1#char0,43>
                        ] .
+
 # NAMED ENTITY RECOGNITION AND LINKING            
 <http://ns.aksw.org/fox/demo/document-1#char3,17>
         a                     nif:Phrase ;
