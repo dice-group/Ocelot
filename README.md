@@ -12,7 +12,7 @@ Request FOX with CURL:
 ```bash
 curl -d '{"input" : "Is Michelle Obama the wife of Barack Obama?","type": "text","task": "re","output": "turtle","lang": "en"}' -H "Content-Type:application/json;charset=utf-8" http://fox-demo.aksw.org/fox
 ```
-OR
+
 ```bash
 curl -d '{"input" : "Michelle Obama and Barack Obama were married in 2018?","type": "text","task": "re","output": "turtle","lang": "en"}' -H "Content-Type:application/json;charset=utf-8" http://fox-demo.aksw.org/fox
 ```
