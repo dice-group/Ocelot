@@ -1,6 +1,8 @@
+[1]: https://github.com/dice-group/FOX
+
 We will publish the source-code, settings, datasets and results after the paper was accepted. 
 
-The restuls are integerated in FOX: http://fox-demo.aksw.org
+The restuls are integerated in FOX (version 2.5.0): [`http://fox-demo.aksw.org`][1]:
 
 Example: "Is Michelle Obama the wife of Barack Obama?"
 
