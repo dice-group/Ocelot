@@ -17,6 +17,20 @@
 *.zip
 *.tar.gz
 *.rar
+.settings
+.project
+.classpath
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/release/
+
+/serial/
+/serial_b/
+/serial_all/
+/serial_syn/
+/src/test/java/org/aksw/nlp/
+/src/main/java/org/aksw/nlp/
+
+/src/test/java/org/aksw/legacy/
+/src/main/java/org/aksw/legacy/
