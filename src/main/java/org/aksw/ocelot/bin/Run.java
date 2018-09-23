@@ -1,8 +1,8 @@
 package org.aksw.ocelot.bin;
 
 import org.aksw.ocelot.common.io.Memory;
-import org.aksw.ocelot.common.web.WebAppsUtil;
 import org.aksw.ocelot.core.pipeline.Drift;
+import org.aksw.simba.knowledgeextraction.commons.io.WebAppsUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
