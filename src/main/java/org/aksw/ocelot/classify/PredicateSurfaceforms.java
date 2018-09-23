@@ -10,13 +10,13 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.aksw.ocelot.application.ApplicationUtil;
-import org.aksw.ocelot.common.io.SerializationUtil;
 import org.aksw.ocelot.common.nlp.synonyms.OxfordDictionariesSynonyms;
 import org.aksw.ocelot.common.nlp.synonyms.WikidataLabels;
 import org.aksw.ocelot.common.nlp.synonyms.WordnikSynonyms;
 import org.aksw.ocelot.data.Const;
 import org.aksw.ocelot.data.properties.BackgroundKnowledge;
 import org.aksw.ocelot.data.properties.PropertiesFactory;
+import org.aksw.simba.knowledgeextraction.commons.io.SerializationUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -72,7 +72,7 @@ public class PredicateSurfaceforms {
     if (dbpediaLabels == null) {
       // init folder
       final Path file = Paths.get(Const.RELATION_FILE).normalize();
-      final String folder = (file.toString().substring(0, file.toString().indexOf("/")));
+      final String folder = file.toString().substring(0, file.toString().indexOf("/"));
 
       // get the labels
       final Set<Path> predicateFiles = ApplicationUtil.getAllPredicateFiles(folder);

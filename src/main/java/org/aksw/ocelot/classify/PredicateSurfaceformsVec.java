@@ -12,9 +12,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.aksw.ocelot.common.Stopwords;
-import org.aksw.ocelot.common.io.SerializationUtil;
 import org.aksw.ocelot.core.wordembedding.Word2VecBinding;
 import org.aksw.ocelot.core.wordembedding.Word2VecMath;
+import org.aksw.simba.knowledgeextraction.commons.io.SerializationUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -79,7 +79,7 @@ public class PredicateSurfaceformsVec {
                 final double sim = Word2VecMath//
                     .cosineSimilarityNormalizedVecs(//
                         Word2VecMath.normalize(vv), Word2VecMath.normalize(vec)//
-                );
+                    );
 
                 if (sim > max) {
                   max = sim;

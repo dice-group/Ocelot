@@ -18,7 +18,7 @@ import org.aksw.jena_sparql_api.delay.core.QueryExecutionFactoryDelay;
 import org.aksw.jena_sparql_api.http.QueryExecutionFactoryHttp;
 import org.aksw.jena_sparql_api.pagination.core.QueryExecutionFactoryPaginated;
 import org.aksw.ocelot.common.io.FileUtil;
-import org.aksw.ocelot.common.io.SerializationUtil;
+import org.aksw.simba.knowledgeextraction.commons.io.SerializationUtil;
 import org.apache.jena.atlas.web.HttpException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -78,9 +78,8 @@ public class Properties implements BackgroundKnowledge {
    */
   public int subjects(final String p) {
     final Function<JSONArray, Integer> resultToInt = ja -> Integer.valueOf(ja.join(" ")//
-        .replaceAll(
-            Pattern.quote(
-                "{\"callret-0\":{\"datatype\":\"http://www.w3.org/2001/XMLSchema#integer\",\"type\":\"typed-literal\",\"value\":\""),
+        .replaceAll(Pattern.quote(
+            "{\"callret-0\":{\"datatype\":\"http://www.w3.org/2001/XMLSchema#integer\",\"type\":\"typed-literal\",\"value\":\""),
             "")//
         .replaceAll("\"}}", "")//
     );
@@ -161,7 +160,7 @@ public class Properties implements BackgroundKnowledge {
           s = ja.getJSONObject(i).getJSONObject("s").getString("value");
           final String o = ja.getJSONObject(i).getJSONObject("o").getString("value");
 
-          if ((s != null) && !s.trim().isEmpty()) {
+          if (s != null && !s.trim().isEmpty()) {
             if (map.get(s) == null) {
               map.put(s, new HashSet<String>());
             }

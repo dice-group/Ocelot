@@ -7,8 +7,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.aksw.ocelot.application.ApplicationUtil;
-import org.aksw.ocelot.common.io.SerializationUtil;
 import org.aksw.ocelot.generalisation.graph.ColoredDirectedGraph;
+import org.aksw.simba.knowledgeextraction.commons.io.SerializationUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

@@ -11,12 +11,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import org.aksw.ocelot.common.io.SerializationUtil;
 import org.aksw.ocelot.common.io.WriteAndReadFile;
 import org.aksw.ocelot.data.Const;
 import org.aksw.ocelot.data.kb.Triple;
 import org.aksw.ocelot.data.properties.PropertiesFactory;
 import org.aksw.ocelot.share.CandidateTypes;
+import org.aksw.simba.knowledgeextraction.commons.io.SerializationUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -79,7 +79,7 @@ public class Drift {
     final Set<Triple> triples = model.triples(predicate);
 
     // fix step size
-    if ((steps > triples.size()) || (steps < 1)) {
+    if (steps > triples.size() || steps < 1) {
       steps = triples.size();
     }
 
@@ -166,7 +166,7 @@ public class Drift {
     paths.stream().parallel()//
         .forEach(path -> all.putAll(SerializationUtil.deserialize(//
             path.toString(), HashMap.class)//
-    ));
+        ));
 
     LOG.info("Total triple size (" + predicate + "): " + all.size());
     data = all;
@@ -228,8 +228,8 @@ public class Drift {
   }
 
   private String getFileName(final String predicate, final int current, final int max) {
-    return predicate.replace("http://dbpedia.org/ontology/", "") + "_result_"
-        + (current + "-" + max) + ".data";
+    return predicate.replace("http://dbpedia.org/ontology/", "") + "_result_" + current + "-" + max
+        + ".data";
   }
 
   /**

@@ -13,8 +13,8 @@ import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
-import org.aksw.ocelot.common.io.SerializationUtil;
 import org.aksw.ocelot.common.io.SparqlExecution;
+import org.aksw.simba.knowledgeextraction.commons.io.SerializationUtil;
 import org.json.JSONArray;
 
 /**
@@ -95,8 +95,7 @@ public class DBpediaStats extends SparqlExecution {
                 + "}";
             final JSONArray ja = execSelectToJSONArray(q);
             final String joinedValues = resultToString.apply(ja);
-            domainRangeTypesToPredicates.put(new SimpleEntry<String, String>(domain, range),
-                joinedValues);
+            domainRangeTypesToPredicates.put(new SimpleEntry<>(domain, range), joinedValues);
           }
         }
         domainRangeTypesToPredicates
@@ -141,7 +140,7 @@ public class DBpediaStats extends SparqlExecution {
 
       int i = 0;
       int current = -1;
-      while (iter.hasNext() && (i++ < top)) {
+      while (iter.hasNext() && i++ < top) {
         current = iter.next();
       }
       for (final Entry<String, Integer> entry : map.entrySet()) {
@@ -154,9 +153,8 @@ public class DBpediaStats extends SparqlExecution {
 
   public int subjects(final String p) {
     final Function<JSONArray, Integer> resultToInt = ja -> Integer.valueOf(ja.join(" ")//
-        .replaceAll(
-            Pattern.quote(
-                "{\"callret-0\":{\"datatype\":\"http://www.w3.org/2001/XMLSchema#integer\",\"type\":\"typed-literal\",\"value\":\""),
+        .replaceAll(Pattern.quote(
+            "{\"callret-0\":{\"datatype\":\"http://www.w3.org/2001/XMLSchema#integer\",\"type\":\"typed-literal\",\"value\":\""),
             "")//
         .replaceAll("\"}}", "")//
     );

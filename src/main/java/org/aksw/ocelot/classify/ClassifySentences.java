@@ -11,9 +11,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.aksw.ocelot.common.Stopwords;
-import org.aksw.ocelot.common.io.SerializationUtil;
 import org.aksw.ocelot.core.wordembedding.Word2VecBinding;
 import org.aksw.ocelot.generalisation.GModel;
+import org.aksw.simba.knowledgeextraction.commons.io.SerializationUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -69,7 +69,7 @@ public class ClassifySentences {
      * <code>
      sentenceToVec = SerializationUtil.deserialize(sentenceToVecFile, HashMap.class);
      if (sentenceToVec == null) {
-    
+
        sentenceToVec = createCandidateVec();
        try {
          SerializationUtil.serialize(sentenceToVecFile, sentenceToVec, false);
@@ -85,17 +85,17 @@ public class ClassifySentences {
      // compare
      final Set<String> set = new HashSet<>();
      final Set<String> setused = new HashSet<>();
-
+    
      // each sentence
      for (final Entry<String, float[]> sentencesToVec : sentenceToVec.entrySet()) {
        final String sentence = sentencesToVec.getKey();
        final float[] vecB = sentencesToVec.getValue();
        if (vecB != null) {
-
+    
          // each p
          double max = Double.MIN_VALUE;
          String maxpredicate = "";
-
+    
          for (final Entry<String, float[]> predicatesVec : predicateVec.entrySet()) {
            final String predicate = predicatesVec.getKey();
            setused.add(predicate);
@@ -106,7 +106,7 @@ public class ClassifySentences {
                  .cosineSimilarityNormalizedVecs(//
                      Word2VecMath.normalize(vecA), Word2VecMath.normalize(vecB)//
              );
-
+    
              if (sim > max) {
                max = sim;
                maxpredicate = predicate;
@@ -115,13 +115,13 @@ public class ClassifySentences {
              LOG.info("No vec for " + predicate);
            }
          } // end for
-
+    
          if (gmodel.sentenceToPredicates.get(sentence).contains(maxpredicate)) {
-
+    
            // LOG.info("--");
            // LOG.info(max);
            set.add(maxpredicate);
-
+    
            // LOG.info(sentence);
            // LOG.info(gmodel.sentenceToPredicates.get(sentence));
          }
@@ -164,21 +164,21 @@ public class ClassifySentences {
    * <code>
    protected Map<String, float[]> createCandidateVec() {
      final Map<String, float[]> sentenceToVec = new HashMap<>();
-  
+
      for (final Entry<String, Set<Map<CandidateTypes, Object>>> entry : gmodel.sentenceToCandidates
          .entrySet()) {
-  
+
        final String sentence = entry.getKey();
        final Set<Map<CandidateTypes, Object>> candidates = entry.getValue();
        if (candidates.size() > 1) {
          LOG.info("more than one");
        }
-  
+
        // TODO: here we have several candidates
        final Map<CandidateTypes, Object> candidate = candidates.iterator().next();
        &#64;SuppressWarnings("unchecked")
        final List<IndexedWord> sp = (ArrayList<IndexedWord>) candidate.get(CandidateTypes.SP);
-  
+
        // cleans sp
        Set<String> spclean = new HashSet<>();
        for (final IndexedWord s : sp) {

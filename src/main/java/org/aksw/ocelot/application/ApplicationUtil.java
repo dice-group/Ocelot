@@ -10,8 +10,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.aksw.ocelot.common.io.FileUtil;
-import org.aksw.ocelot.common.nlp.stanford.StanfordPipe;
 import org.aksw.ocelot.data.Const;
 import org.aksw.ocelot.generalisation.GGeneralizeMain;
 import org.aksw.ocelot.generalisation.graph.ColoredDirectedGraph;
@@ -22,6 +20,8 @@ import org.aksw.ocelot.generalisation.graph.IndexedWordNode;
 import org.aksw.ocelot.generalisation.graph.RootNode;
 import org.aksw.ocelot.generalisation.graph.SimpleNode;
 import org.aksw.simba.knowledgeextraction.commons.cache.InMemoryCache;
+import org.aksw.simba.knowledgeextraction.commons.io.FileUtil;
+import org.aksw.simba.knowledgeextraction.commons.nlp.StanfordPipe;
 import org.aksw.simba.knowledgeextraction.commons.nlp.StanfordPipeExtended;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.LogManager;
@@ -64,7 +64,7 @@ public class ApplicationUtil {
 
     // Stanford
     if (stanfordPipe == null) {
-      stanfordPipe = StanfordPipe.getStanfordPipe();
+      stanfordPipe = StanfordPipe.instance();
     }
     final SemanticGraph sg = stanfordPipe.getSemanticGraph(sentence);
 
