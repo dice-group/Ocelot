@@ -11,8 +11,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.aksw.ocelot.common.config.Constant;
-import org.aksw.ocelot.common.lang.MapUtil;
 import org.aksw.ocelot.data.Const;
+import org.aksw.simba.knowledgeextraction.commons.lang.MapUtil;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.fluent.Response;
@@ -36,7 +36,7 @@ public class Word2VecBinding {
    */
   public float[] addition(final Set<String> words) {
     final List<float[]> vecs = vec(words);
-    if ((vecs != null) && !vecs.isEmpty()) {
+    if (vecs != null && !vecs.isEmpty()) {
       float[] currentVec = vecs.get(0);
       for (int i = 1; i < vecs.size(); i++) {
         currentVec = add(currentVec, vecs.get(i));
@@ -136,7 +136,7 @@ public class Word2VecBinding {
           .append(URLEncoder.encode(b, Constant.UTF_8.name())).append("&").append("apikey=")
           .append(key).toString();
       final JSONObject jo = send(url);
-      if ((jo != null) && jo.has("cos")) {
+      if (jo != null && jo.has("cos")) {
         return jo.getDouble("cos");
       } else {
         return -1D;

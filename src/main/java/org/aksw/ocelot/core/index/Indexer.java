@@ -19,13 +19,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import org.aksw.ocelot.common.io.FileUtil;
-import org.aksw.ocelot.common.lang.CollectionUtil;
 import org.aksw.ocelot.data.Const;
 import org.aksw.ocelot.data.wikipedia.IDataExtractor;
 import org.aksw.ocelot.data.wikipedia.WikiDoc;
 import org.aksw.ocelot.data.wikipedia.WikipediaExtractor;
 import org.aksw.ocelot.share.EnumSolrWikiIndex;
+import org.aksw.simba.knowledgeextraction.commons.io.FileUtil;
+import org.aksw.simba.knowledgeextraction.commons.lang.CollectionUtil;
 import org.aksw.simba.knowledgeextraction.commons.nlp.StanfordPipeExtended;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

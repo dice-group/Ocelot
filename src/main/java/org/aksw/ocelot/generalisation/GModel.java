@@ -9,12 +9,12 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.aksw.commons.util.Pair;
-import org.aksw.ocelot.common.lang.StringUtil;
 import org.aksw.ocelot.core.measure.Cleansing;
 import org.aksw.ocelot.core.pipeline.Drift;
 import org.aksw.ocelot.data.kb.Triple;
 import org.aksw.ocelot.generalisation.graph.ColoredDirectedGraph;
 import org.aksw.ocelot.share.CandidateTypes;
+import org.aksw.simba.knowledgeextraction.commons.lang.StringUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -64,7 +64,7 @@ public class GModel {
    */
   protected void initData(Map<Triple, Set<Map<CandidateTypes, Object>>> data) {
 
-    if ((data == null) || data.isEmpty()) {
+    if (data == null || data.isEmpty()) {
       LOG.warn("no data given!!");
       data = new HashMap<>();
     }

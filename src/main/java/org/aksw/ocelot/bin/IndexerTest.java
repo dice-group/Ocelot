@@ -3,9 +3,9 @@ package org.aksw.ocelot.bin;
 import java.nio.file.Path;
 import java.util.Set;
 
-import org.aksw.ocelot.common.io.FileUtil;
 import org.aksw.ocelot.core.index.Indexer;
 import org.aksw.ocelot.data.Const;
+import org.aksw.simba.knowledgeextraction.commons.io.FileUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.aksw.ocelot.common.lang.UniqueQueue;
 import org.aksw.ocelot.generalisation.graph.ColoredDirectedGraph;
 import org.aksw.ocelot.generalisation.graph.IColoredEdge;
 import org.aksw.ocelot.generalisation.graph.INode;
 import org.aksw.ocelot.generalisation.graph.IndexedWordNode;
 import org.aksw.ocelot.generalisation.graph.RootNode;
+import org.aksw.simba.knowledgeextraction.commons.lang.UniqueQueue;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -89,10 +89,10 @@ public class GPattern {
         if (!validGeneralisation(lgg)) {
           LOG.trace("Not a valid generalisation, missing domain or range type node.");
         } else {
-          if ((lgg.vertexSet().size() > 0)) {
+          if (lgg.vertexSet().size() > 0) {
 
-            if ((bestmatch == null)
-                || (lgg.vertexSet().size() > bestmatch.getLeft().vertexSet().size())) {
+            if (bestmatch == null
+                || lgg.vertexSet().size() > bestmatch.getLeft().vertexSet().size()) {
 
               final boolean originalEmptyA = treeA.getMiddle().isEmpty();
               final boolean originalEmptyB = treeB.getMiddle().isEmpty();
@@ -176,7 +176,7 @@ public class GPattern {
     final RootNode rootA = a.getRoot();
     final RootNode rootB = b.getRoot();
 
-    if ((rootA != null) && (rootB != null) && rootA.getLabel().equals(rootB.getLabel())) {
+    if (rootA != null && rootB != null && rootA.getLabel().equals(rootB.getLabel())) {
 
       // root label a and b
       // final Set<String> allRootLabels = new HashSet<>();

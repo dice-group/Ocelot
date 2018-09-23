@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.aksw.ocelot.common.io.SparqlExecution;
-import org.aksw.ocelot.common.lang.MapUtil;
+import org.aksw.simba.knowledgeextraction.commons.lang.MapUtil;
 import org.json.JSONArray;
 
 /**
@@ -74,9 +74,9 @@ public class DBpediaStatistics extends SparqlExecution {
     final JSONArray ja = run(getInstanceCounterQuery(p));
     final Set<SimpleEntry<String, String>> triple = new HashSet<>();
     for (int i = 0; i < ja.length(); i++) {
-      triple.add(new SimpleEntry<String, String>(//
-          (ja.getJSONObject(i).getJSONObject("s").getString("value")), //
-          (ja.getJSONObject(i).getJSONObject("o").getString("value"))//
+      triple.add(new SimpleEntry<>(//
+          ja.getJSONObject(i).getJSONObject("s").getString("value"), //
+          ja.getJSONObject(i).getJSONObject("o").getString("value")//
       ));
     }
     objectPropertiesToInstanceCounter.put(p, triple.size());

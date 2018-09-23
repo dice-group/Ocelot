@@ -17,7 +17,7 @@ import org.aksw.jena_sparql_api.core.QueryExecutionFactory;
 import org.aksw.jena_sparql_api.delay.core.QueryExecutionFactoryDelay;
 import org.aksw.jena_sparql_api.http.QueryExecutionFactoryHttp;
 import org.aksw.jena_sparql_api.pagination.core.QueryExecutionFactoryPaginated;
-import org.aksw.ocelot.common.io.FileUtil;
+import org.aksw.simba.knowledgeextraction.commons.io.FileUtil;
 import org.aksw.simba.knowledgeextraction.commons.io.SerializationUtil;
 import org.apache.jena.atlas.web.HttpException;
 import org.apache.log4j.LogManager;

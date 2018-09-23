@@ -17,9 +17,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.aksw.ocelot.common.io.FileUtil;
-import org.aksw.ocelot.common.lang.CollectionUtil;
 import org.aksw.ocelot.data.Const;
+import org.aksw.simba.knowledgeextraction.commons.io.FileUtil;
+import org.aksw.simba.knowledgeextraction.commons.lang.CollectionUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -197,7 +197,7 @@ public class SurfaceFormGenerator implements ISurfaceForms {
 
     final String sf = createCleanSurfaceForm(value);
 
-    if ((sf != null) && !sf.trim().isEmpty()) {
+    if (sf != null && !sf.trim().isEmpty()) {
       if (!surfaceForms.containsKey(uri)) {
         surfaceForms.put(uri, new HashSet<String>());
       }
@@ -214,7 +214,7 @@ public class SurfaceFormGenerator implements ISurfaceForms {
         LOG.info("Done read surfaceforms from file.");
       }
     }
-    return (surfaceForms != null) ? surfaceForms : _getSurfaceForms();
+    return surfaceForms != null ? surfaceForms : _getSurfaceForms();
   }
 
   /**
@@ -316,7 +316,7 @@ public class SurfaceFormGenerator implements ISurfaceForms {
   }
 
   protected List<String> getSubjectsFromNTriple(final String filename, final String replacePrefix) {
-    final List<String> results = new ArrayList<String>();
+    final List<String> results = new ArrayList<>();
     final NxParser nxp = openNxParser(filename);
     while (nxp.hasNext()) {
       final String ns = nxp.next()[0].toString();
@@ -331,16 +331,14 @@ public class SurfaceFormGenerator implements ISurfaceForms {
 
   protected List<String[]> getSubjectAndObjectsFromNTriple(final String filename,
       final String replacePrefix) {
-    final List<String[]> results = new ArrayList<String[]>();
+    final List<String[]> results = new ArrayList<>();
     final NxParser nxp = openNxParser(filename);
     while (nxp.hasNext()) {
       final Node[] ns = nxp.next();
-      results
-          .add(new String[] {
-              replacePrefix.equals("") ? ns[0].toString()
-                  : ns[0].toString().replace(replacePrefix, ""),
-              replacePrefix.equals("") ? ns[2].toString()
-                  : ns[2].toString().replace(replacePrefix, ""),});
+      results.add(new String[] {
+          replacePrefix.equals("") ? ns[0].toString() : ns[0].toString().replace(replacePrefix, ""),
+          replacePrefix.equals("") ? ns[2].toString()
+              : ns[2].toString().replace(replacePrefix, ""),});
     }
     return results;
   }

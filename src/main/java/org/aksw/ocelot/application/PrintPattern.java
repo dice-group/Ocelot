@@ -8,9 +8,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.aksw.ocelot.classify.PredicateSurfaceformsVec;
-import org.aksw.ocelot.common.lang.MapUtil;
-import org.aksw.ocelot.common.lang.StringUtil;
 import org.aksw.ocelot.generalisation.graph.ColoredDirectedGraph;
+import org.aksw.simba.knowledgeextraction.commons.lang.MapUtil;
+import org.aksw.simba.knowledgeextraction.commons.lang.StringUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

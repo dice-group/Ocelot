@@ -7,12 +7,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.aksw.ocelot.common.lang.MapUtil;
 import org.aksw.ocelot.core.measure.nlr.RootNLR;
 import org.aksw.ocelot.core.pipeline.Drift;
 import org.aksw.ocelot.data.kb.Triple;
 import org.aksw.ocelot.data.properties.PropertiesFactory;
 import org.aksw.ocelot.share.CandidateTypes;
+import org.aksw.simba.knowledgeextraction.commons.lang.MapUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -103,9 +103,9 @@ public class MeasurementExperiment {
         // LOG.info("support: " + su);
         // LOG.info("specificity: " + sp);
 
-        if ((su != null) && (sp != null)) {
+        if (su != null && sp != null) {
           Double value = 0D;
-          value = (su * sp);
+          value = su * sp;
           combined.get(relation).put(nlr, value);
         }
       }
@@ -129,7 +129,7 @@ public class MeasurementExperiment {
 
   /**
    * For debug.
-   * 
+   *
    * @param scores
    */
   public void print(final Map<String, Map<String, Double>> scores) {

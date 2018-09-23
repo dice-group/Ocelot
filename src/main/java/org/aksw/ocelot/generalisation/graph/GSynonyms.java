@@ -7,8 +7,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.aksw.ocelot.common.lang.MapUtil;
 import org.aksw.ocelot.core.measure.MeasurementExperiment;
+import org.aksw.simba.knowledgeextraction.commons.lang.MapUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

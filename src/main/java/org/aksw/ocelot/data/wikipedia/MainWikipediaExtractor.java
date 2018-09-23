@@ -5,8 +5,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.aksw.ocelot.common.io.FileUtil;
 import org.aksw.ocelot.data.Const;
+import org.aksw.simba.knowledgeextraction.commons.io.FileUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

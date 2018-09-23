@@ -3,7 +3,7 @@ package org.aksw.ocelot.common.config;
 import java.io.File;
 import java.nio.file.Paths;
 
-import org.aksw.ocelot.common.io.FileUtil;
+import org.aksw.simba.knowledgeextraction.commons.io.FileUtil;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.log4j.LogManager;
@@ -22,7 +22,7 @@ public class CfgManager {
 
   /**
    * Overwrites the default configuration folder value 'config'.
-   * 
+   *
    * @param folder
    */
   public static String setFolder(final String folder) {
