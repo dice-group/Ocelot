@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 import org.aksw.ocelot.common.io.FileUtil;
 import org.aksw.ocelot.common.nlp.stanford.StanfordPipe;
-import org.aksw.ocelot.core.nlp.StanfordPipeExtended;
 import org.aksw.ocelot.data.Const;
 import org.aksw.ocelot.generalisation.GGeneralizeMain;
 import org.aksw.ocelot.generalisation.graph.ColoredDirectedGraph;
@@ -23,6 +22,7 @@ import org.aksw.ocelot.generalisation.graph.IndexedWordNode;
 import org.aksw.ocelot.generalisation.graph.RootNode;
 import org.aksw.ocelot.generalisation.graph.SimpleNode;
 import org.aksw.simba.knowledgeextraction.commons.cache.InMemoryCache;
+import org.aksw.simba.knowledgeextraction.commons.nlp.StanfordPipeExtended;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -69,10 +69,10 @@ public class ApplicationUtil {
     final SemanticGraph sg = stanfordPipe.getSemanticGraph(sentence);
 
     sg.vertexListSorted().forEach(node -> {
-      if ((node.beginPosition() >= domainBegin) && (node.beginPosition() < domainEnd)) {
+      if (node.beginPosition() >= domainBegin && node.beginPosition() < domainEnd) {
         node.setOriginalText(Const.RELATION_DOMAIN_PLACEHOLDER);
       }
-      if ((node.beginPosition() >= rangeBegin) && (node.beginPosition() < rangeEnd)) {
+      if (node.beginPosition() >= rangeBegin && node.beginPosition() < rangeEnd) {
         node.setOriginalText(Const.RELATION_RANGE_PLACEHOLDER);
       }
     });

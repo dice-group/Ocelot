@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.aksw.commons.util.Pair;
-import org.aksw.ocelot.core.nlp.StanfordPipeExtended;
 import org.aksw.ocelot.data.Const;
 import org.aksw.ocelot.generalisation.graph.ColoredDirectedGraph;
 import org.aksw.ocelot.generalisation.graph.ColoredEdge;
@@ -13,6 +12,7 @@ import org.aksw.ocelot.generalisation.graph.INode;
 import org.aksw.ocelot.generalisation.graph.IndexedWordNode;
 import org.aksw.ocelot.generalisation.graph.IndexedWordNode.GType;
 import org.aksw.ocelot.generalisation.graph.RootNode;
+import org.aksw.simba.knowledgeextraction.commons.nlp.StanfordPipeExtended;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -30,7 +30,7 @@ public class SemanticGraphToColoredDirectedGraph {
    *
    * @param string
    * @return cleaned string <code>
-  
+
    public static String clean(final String string) {
      return string.replaceAll("[^A-Za-z\\-]", "").trim();
    }
@@ -60,7 +60,7 @@ public class SemanticGraphToColoredDirectedGraph {
       final String relation = edge.getRelation().getShortName();
 
       INode source = null, target = null, relationNode = null;
-      if ((sourceWord.equals(root))) {
+      if (sourceWord.equals(root)) {
 
         source = new RootNode(new Integer(sourceWord.index()).toString(),
             sourceWord.originalText().toString());
@@ -127,7 +127,7 @@ public class SemanticGraphToColoredDirectedGraph {
    * <code>
    public static synchronized void replaceDomainAndRange(final List<Integer> indices,
        final SemanticGraph semanticGraph) {
-
+  
      final Pair<Integer, Integer> domain = new Pair<>(indices.get(0), indices.get(1));
      final Pair<Integer, Integer> range = new Pair<>(indices.get(2), indices.get(3));
      replaceDomainAndRange(new Pair<>(domain, range), semanticGraph);
@@ -141,10 +141,10 @@ public class SemanticGraphToColoredDirectedGraph {
     final Pair<Integer, Integer> domain = indices.getKey();
     final Pair<Integer, Integer> range = indices.getValue();
 
-    for (int i = domain.getKey() + 1; i <= (domain.getValue() + 1); i++) {
+    for (int i = domain.getKey() + 1; i <= domain.getValue() + 1; i++) {
       setPlaceholder(semanticGraph.getNodeByIndexSafe(i), Const.RELATION_DOMAIN_PLACEHOLDER);
     }
-    for (int i = range.getKey() + 1; i <= (range.getValue() + 1); i++) {
+    for (int i = range.getKey() + 1; i <= range.getValue() + 1; i++) {
       setPlaceholder(semanticGraph.getNodeByIndexSafe(i), Const.RELATION_RANGE_PLACEHOLDER);
     }
   }
@@ -174,7 +174,7 @@ public class SemanticGraphToColoredDirectedGraph {
       final Pair<Integer, Integer> range = indices.getValue();
 
       // domain
-      for (int i = domain.getKey() + 1; i <= (domain.getValue() + 1); i++) {
+      for (int i = domain.getKey() + 1; i <= domain.getValue() + 1; i++) {
         final IndexedWord w = semanticGraph.getNodeByIndexSafe(i);
         for (final SemanticGraphEdge edge : semanticGraph.outgoingEdgeList(w)) {
           if (edge.getRelation().getLongName().equals(tag)) {
@@ -184,7 +184,7 @@ public class SemanticGraphToColoredDirectedGraph {
         }
       }
       // range
-      for (int i = range.getKey() + 1; i <= (range.getValue() + 1); i++) {
+      for (int i = range.getKey() + 1; i <= range.getValue() + 1; i++) {
         final IndexedWord w = semanticGraph.getNodeByIndexSafe(i);
         for (final SemanticGraphEdge edge : semanticGraph.outgoingEdgeList(w)) {
           if (edge.getRelation().getLongName().equals(tag)) {

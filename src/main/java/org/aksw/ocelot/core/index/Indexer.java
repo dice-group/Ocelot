@@ -21,12 +21,12 @@ import java.util.concurrent.TimeUnit;
 
 import org.aksw.ocelot.common.io.FileUtil;
 import org.aksw.ocelot.common.lang.CollectionUtil;
-import org.aksw.ocelot.core.nlp.StanfordPipeExtended;
 import org.aksw.ocelot.data.Const;
 import org.aksw.ocelot.data.wikipedia.IDataExtractor;
 import org.aksw.ocelot.data.wikipedia.WikiDoc;
 import org.aksw.ocelot.data.wikipedia.WikipediaExtractor;
 import org.aksw.ocelot.share.EnumSolrWikiIndex;
+import org.aksw.simba.knowledgeextraction.commons.nlp.StanfordPipeExtended;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.solr.common.SolrInputDocument;
@@ -165,7 +165,7 @@ public class Indexer {
             }
           }
           // log
-          if ((((ii) % ((wikidocs.size() / 10) + 1)) == 0) || (ii == wikidocs.size())) {
+          if (ii % (wikidocs.size() / 10 + 1) == 0 || ii == wikidocs.size()) {
             LOG.info("+ 10% done ... service (sentence) " + ii);
           }
         }
@@ -200,7 +200,7 @@ public class Indexer {
     for (final Integer sec : sections.keySet()) {
       final String text = sections.get(sec);
       // annotate the sentences
-      if ((text != null) && !text.isEmpty()) {
+      if (text != null && !text.isEmpty()) {
         final Annotation ann = new Annotation(text);
         if (ann != null) {
 
@@ -251,12 +251,12 @@ public class Indexer {
             // IndexStatistic.sentenceLengthToFrequent.put(sentencelength,
             // value == null ? 1 : 1 + sentencelength);
 
-            if ((sentencelength < 100) && (sentencelength > 3)) {
+            if (sentencelength < 100 && sentencelength > 3) {
               IndexStatistic.sentence_used++;
 
               results.put(//
-                  new SimpleEntry<Integer, Integer>(sentenceNr, sec), //
-                  new SimpleEntry<String, Map<String, List<Object>>>(//
+                  new SimpleEntry<>(sentenceNr, sec), //
+                  new SimpleEntry<>(//
                       sentence.toString(), //
                       annos//
                   ));

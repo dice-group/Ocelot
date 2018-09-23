@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 
 import org.aksw.ocelot.core.indexsearch.CorpusElement;
 import org.aksw.ocelot.core.indexsearch.ICorpus;
-import org.aksw.ocelot.core.nlp.StanfordPipeExtended;
 import org.aksw.ocelot.data.Const;
 import org.aksw.ocelot.data.kb.Triple;
 import org.aksw.ocelot.share.CandidateTypes;
+import org.aksw.simba.knowledgeextraction.commons.nlp.StanfordPipeExtended;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -109,9 +109,9 @@ public class CandidateNLP {
               final Map<String, Long> posCounts = element.getPOS().stream()
                   .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
 
-              if (((posCounts.get(":") != null) && (posCounts.get(":") > Const.MAX_PUNCT)) //
-                  || ((posCounts.get(".") != null) && (posCounts.get(".") > Const.MAX_PUNCT))//
-                  || ((posCounts.get(",") != null) && (posCounts.get(",") > Const.MAX_PUNCT))//
+              if (posCounts.get(":") != null && posCounts.get(":") > Const.MAX_PUNCT //
+                  || posCounts.get(".") != null && posCounts.get(".") > Const.MAX_PUNCT//
+                  || posCounts.get(",") != null && posCounts.get(",") > Const.MAX_PUNCT//
               ) {
                 sentenceIDsIter.remove();
               } else {
@@ -145,7 +145,7 @@ public class CandidateNLP {
     final List<Integer> index = Arrays.asList(65167, 65172, 65177, 65179, 65188, 65193, 65195,
         65202, 65212, 65214, 65219, 65223);
 
-    final Pair<CorpusIndex, CorpusIndex> closest = new Pair<CorpusIndex, CorpusIndex>();
+    final Pair<CorpusIndex, CorpusIndex> closest = new Pair<>();
     closest.first = new CorpusIndex(3, 4);
     closest.second = new CorpusIndex(9, 10);
 
@@ -185,12 +185,12 @@ public class CandidateNLP {
       final int subjectIndexStart = index.get(closest.first.getStart()) - offset;
       // length of the last token in surface form
       int lastLength = token.get(closest.first.getEnd()).length();
-      final int subjectIndexEnd = (index.get(closest.first.getEnd()) - offset) + lastLength;
+      final int subjectIndexEnd = index.get(closest.first.getEnd()) - offset + lastLength;
 
       final int objectIndexStart = index.get(closest.second.getStart()) - offset;
       // length of the last token in surface form
       lastLength = token.get(closest.second.getEnd()).length();
-      final int objectIndexEnd = (index.get(closest.second.getEnd()) - offset) + lastLength;
+      final int objectIndexEnd = index.get(closest.second.getEnd()) - offset + lastLength;
 
       final String subjectMention = sentence.substring(subjectIndexStart, subjectIndexEnd);
       final String objectMention = sentence.substring(objectIndexStart, objectIndexEnd);
@@ -249,7 +249,7 @@ public class CandidateNLP {
               element.getToken(), element.getNER());
 
           if (subjectIndex.isEmpty() || objectIndex.isEmpty()
-              || ((subjectIndex.size() == 1) && subjectIndex.equals(objectIndex))) {
+              || subjectIndex.size() == 1 && subjectIndex.equals(objectIndex)) {
             iii.remove(); // sentence id
             continue;
           }
@@ -288,7 +288,7 @@ public class CandidateNLP {
               shortestPath = stanfordDEP.clean(shortestPath, sg, index.first.intValue(),
                   index.second.intValue());
 
-              if ((shortestPath == null) || shortestPath.isEmpty()) {
+              if (shortestPath == null || shortestPath.isEmpty()) {
                 iii.remove();
                 continue;
               }
