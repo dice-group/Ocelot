@@ -11,11 +11,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import org.aksw.ocelot.common.io.WriteAndReadFile;
 import org.aksw.ocelot.data.Const;
 import org.aksw.ocelot.data.kb.Triple;
 import org.aksw.ocelot.data.properties.PropertiesFactory;
 import org.aksw.ocelot.share.CandidateTypes;
+import org.aksw.simba.knowledgeextraction.commons.io.FileUtil;
 import org.aksw.simba.knowledgeextraction.commons.io.SerializationUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -140,7 +140,7 @@ public class Drift {
 
     // get files
     final Set<Path> paths;
-    paths = WriteAndReadFile.regularFilesInFolder(Const.TMP_FOLDER.concat(File.separator));
+    paths = FileUtil.regularFilesInFolder(Const.TMP_FOLDER.concat(File.separator));
     // LOG.info("file size: " + paths.size());
 
     // find the file for the predicate and remove the others from 'files'

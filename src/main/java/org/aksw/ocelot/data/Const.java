@@ -3,7 +3,7 @@ package org.aksw.ocelot.data;
 import java.io.File;
 import java.nio.file.Paths;
 
-import org.aksw.ocelot.common.config.CfgManager;
+import org.aksw.simba.knowledgeextraction.commons.config.CfgManager;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 public class Const {
   protected static Logger LOG = LogManager.getLogger(Const.class);
 
+  public static String CFG_FOLDER = CfgManager.cfgFolder;
   public static final boolean NER_USE = true;
 
   public static final XMLConfiguration CFG = CfgManager.getCfg(Const.class);
@@ -34,7 +35,7 @@ public class Const {
   // properties
   public static final String RELATION_DOMAIN = CFG.getString("properties.domain");
   public static final String RELATION_RANGE = CFG.getString("properties.range");
-  public static final String RELATION_FILE = Paths.get(CfgManager.CFG_FOLDER).normalize().resolve(//
+  public static final String RELATION_FILE = Paths.get(CFG_FOLDER).normalize().resolve(//
       CFG.getString("properties.file")).toString();
   public static final String RELATION_DOMAIN_PLACEHOLDER =
       CFG.getString("properties.domainPlaceholder");

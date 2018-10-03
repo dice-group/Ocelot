@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.aksw.ocelot.common.io.SparqlExecution;
+import org.aksw.simba.knowledgeextraction.commons.io.SparqlExecution;
 import org.aksw.simba.knowledgeextraction.commons.lang.MapUtil;
 import org.json.JSONArray;
 

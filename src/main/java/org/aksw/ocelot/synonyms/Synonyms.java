@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.aksw.ocelot.common.nlp.pos.PartOfSpeech;
-import org.aksw.ocelot.common.nlp.stanford.StanfordPipe;
 import org.aksw.ocelot.core.wordembedding.Word2VecBinding;
-import org.aksw.ocelot.core.wordnet.WordNetWrapper;
+import org.aksw.simba.knowledgeextraction.commons.nlp.PartOfSpeech;
+import org.aksw.simba.knowledgeextraction.commons.nlp.StanfordPipe;
+import org.aksw.simba.knowledgeextraction.commons.wordnet.WordNetWrapper;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -27,14 +27,13 @@ import edu.stanford.nlp.ling.CoreLabel;
 public class Synonyms implements ISynonyms {
   protected final static Logger LOG = LogManager.getLogger(Synonyms.class);
 
-  String path = "/home/rspeck/Data/WordNet-3.1";
 
-  private final WordNetWrapper synonymsWordnet = new WordNetWrapper(path);
+  private final WordNetWrapper synonymsWordnet = new WordNetWrapper();
   private final Word2VecBinding synonymsWord2Vec = new Word2VecBinding();
 
   private int max = 20;
 
-  private final StanfordPipe stanfordNLP = StanfordPipe.getStanfordPipe();
+  private final StanfordPipe stanfordNLP = StanfordPipe.instance();
 
   // cache (word to synonyms)
   private final Map<String, List<String>> cache = new HashMap<>();
@@ -104,7 +103,7 @@ public class Synonyms implements ISynonyms {
   private String getLemma(final List<CoreLabel> labels) {
     if (!labels.isEmpty()) {
       final String add = stanfordNLP.getLemma(labels.get(0));
-      if ((add != null) && !add.isEmpty()) {
+      if (add != null && !add.isEmpty()) {
         return add;
       }
     }
@@ -114,7 +113,7 @@ public class Synonyms implements ISynonyms {
   private String getPOS(final List<CoreLabel> labels) {
     if (!labels.isEmpty()) {
       final String add = stanfordNLP.getPOS(labels.get(0));
-      if ((add != null) && !add.isEmpty()) {
+      if (add != null && !add.isEmpty()) {
         return add;
       }
     }

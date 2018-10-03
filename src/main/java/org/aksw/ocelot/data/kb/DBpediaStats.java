@@ -13,8 +13,8 @@ import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
-import org.aksw.ocelot.common.io.SparqlExecution;
 import org.aksw.simba.knowledgeextraction.commons.io.SerializationUtil;
+import org.aksw.simba.knowledgeextraction.commons.io.SparqlExecution;
 import org.json.JSONArray;
 
 /**

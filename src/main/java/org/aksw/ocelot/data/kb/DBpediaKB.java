@@ -11,9 +11,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.aksw.ocelot.common.io.SparqlExecution;
-import org.aksw.ocelot.common.io.WriteAndReadFile;
 import org.aksw.ocelot.data.Const;
+import org.aksw.simba.knowledgeextraction.commons.io.FileUtil;
+import org.aksw.simba.knowledgeextraction.commons.io.SparqlExecution;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -52,11 +52,11 @@ public class DBpediaKB extends SparqlExecution {
 
     final File file = new File(Const.TMP_FOLDER.concat(File.separator)//
         .concat(predicate.replace("http://", "_")) //
-        .concat((max == Integer.MAX_VALUE) ? "all" : String.valueOf(max)) //
+        .concat(max == Integer.MAX_VALUE ? "all" : String.valueOf(max)) //
         .concat("_triples.json"));
 
     // read file
-    JSONArray ja = WriteAndReadFile.readToJSONArray(file);
+    JSONArray ja = FileUtil.readToJSONArray(file);
 
     // no file found
     if (ja != null) {
@@ -70,7 +70,7 @@ public class DBpediaKB extends SparqlExecution {
         ja = execSelectToJSONArray(DBpedia.PREFIX.concat(" ").concat(query));
 
         // writes file
-        final boolean done = WriteAndReadFile.writeFile(ja, file);
+        final boolean done = FileUtil.writeFile(ja, file);
         if (done) {
           LOG.info("File is written.");
         } else {
@@ -88,7 +88,7 @@ public class DBpediaKB extends SparqlExecution {
     final Set<Triple> triplesSet = new HashSet<>();
 
     // check parameter
-    if ((ja == null) || (ja.length() == 0)) {
+    if (ja == null || ja.length() == 0) {
       return triplesSet;
     }
 

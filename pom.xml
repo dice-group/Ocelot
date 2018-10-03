@@ -54,11 +54,7 @@
 	</repositories>
 	<dependencies>
 
-	<dependency>
-		<groupId>javax.mail</groupId>
-		<artifactId>mail</artifactId>
-		<version>1.4.7</version>
-	</dependency>
+
 
 	<dependency>
 		<groupId>javax.mail</groupId>
@@ -70,13 +66,6 @@
 			<groupId>org.aksw.simba.knowledgeextraction</groupId>
 			<artifactId>commons</artifactId>
 			<version>0.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>wordnet</groupId>
-			<artifactId>rita</artifactId>
-			<version>0.0.1</version>
-			<scope>system</scope>
-			<systemPath>${system.libs}/wordnet/rita.jar</systemPath>
 		</dependency>
 		<!-- <dependency> <groupId>org.aksw.ocelot</groupId> <artifactId>ocelot-cugar</artifactId> 
 			<version>0.0.1</version> </dependency> -->
@@ -252,12 +241,7 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.7.3</version>
 		</dependency>
-		<!-- mongo-java-driver -->
-		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongo-java-driver</artifactId>
-			<version>3.0.2</version>
-		</dependency>
+
 		<!-- nxparser -->
 		<dependency>
 			<groupId>org.semanticweb.yars</groupId>

@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.aksw.ocelot.common.io.SparqlExecution;
 import org.aksw.ocelot.data.kb.DBpedia;
 import org.aksw.simba.knowledgeextraction.commons.io.Requests;
+import org.aksw.simba.knowledgeextraction.commons.io.SparqlExecution;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
