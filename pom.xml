@@ -154,9 +154,9 @@
 		</dependency>
 		<!-- commons-compress -->
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-compress</artifactId>
-			<version>1.8</version>
+		  <groupId>org.apache.commons</groupId>
+		  <artifactId>commons-compress</artifactId>
+		  <version>[1.18,)</version>
 		</dependency>
 		<!-- lucene -->
 		<dependency>
