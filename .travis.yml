@@ -17,6 +17,6 @@ cache:
 install:
     - git clone https://github.com/renespeck/knowledgeextraction
     - cd knowledgeextraction
-    - mvn compile install
+    - mvn compile install --quiet
 
 script: mvn clean compile --quiet -DskipTests=false
