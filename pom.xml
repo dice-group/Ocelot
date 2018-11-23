@@ -56,11 +56,12 @@
 			<id>nxparser-repo</id>
 			<url>http://nxparser.googlecode.com/svn/repository</url>
 		</repository>
+		<!--
 		<repository>
 			<id>local repository</id>
 			<name>local repository</name>
 			<url>file://${project.basedir}/repository</url>
-		</repository>
+		</repository>  -->
 	</repositories>
 	<!-- -->
 	<!-- -->
@@ -79,12 +80,12 @@
 		</dependency>
 		<!-- <dependency> <groupId>org.aksw.ocelot</groupId> <artifactId>ocelot-cugar</artifactId> 
 			<version>0.0.1</version> </dependency> -->
-		<!-- external dependencies -->
+		<!-- external dependencies 
 		<dependency>
 			<groupId>algs</groupId>
 			<artifactId>algs</artifactId>
 			<version>0.0.4</version>
-		</dependency>
+		</dependency>-->
 
 		<dependency>
 			<groupId>com.opencsv</groupId>
@@ -184,12 +185,18 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.7.3</version>
 		</dependency>
-		<!-- nxparser -->
+		<!-- https://mvnrepository.com/artifact/org.semanticweb.yars/nxparser -->
+		<dependency>
+		    <groupId>org.semanticweb.yars</groupId>
+		    <artifactId>nxparser</artifactId>
+		    <version>1.2.10</version>
+		</dependency>
+		<!-- nxparser 
 		<dependency>
 			<groupId>org.semanticweb.yars</groupId>
 			<artifactId>nxparser</artifactId>
 			<version>1.2.3</version>
-		</dependency>
+		</dependency>-->
 		<!-- gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
