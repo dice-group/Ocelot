@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cf0c67031ba347779e204b63969a5d73)](https://app.codacy.com/app/renespeck/Ocelot?utm_source=github.com&utm_medium=referral&utm_content=dice-group/Ocelot&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/dice-group/Ocelot.svg?branch=master)](https://travis-ci.org/dice-group/Ocelot)
 
 ### On Extracting Relations using Distributional Semantics and a Tree Generalization
