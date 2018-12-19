@@ -9,76 +9,127 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 /**
- * Reads config files in {@link CFG_FOLDER}
+ * Reads config file.
  *
  * @author Ren&eacute; Speck <speck@informatik.uni-leipzig.de>
  *
  */
 public class Const {
+
   protected static Logger LOG = LogManager.getLogger(Const.class);
+  // public static String CFG_FOLDER = "config";
+  // public static String CFG_FOLDER = "data/ocelot/config";
 
-  public static String CFG_FOLDER = CfgManager.cfgFolder;
+  public static String baseFolder = "config";
+  protected CfgManager cfgManager = null;
+  protected XMLConfiguration CFG = null;
+
+  public static String DATA_FOLDER = null;
+  public static String TMP_FOLDER = null;
+  public static String DBPEDIA_FOLDER = null;
+
+  // properties
+  public static String RELATION_DOMAIN = null;
+  public static String RELATION_RANGE = null;
+  public static String RELATION_FILE = null;
+  public static String RELATION_DOMAIN_PLACEHOLDER = null;
+  public static String RELATION_RANGE_PLACEHOLDER = null;
+
+  // index
+  public static int INDEX_FIXED_THREAD_POOL_SIZE = -1;
+  public static int INDEX_NLP_TIMEOUT = -1;
+  public static int sentenceLengthMin = -1;
+  public static int sentenceLengthMax = -1;
+  public static int searchThreadsSF = -1;
+  public static int searchTimeoutSF = -1;
+
+  // search limit of the wiki index results
+  public static int LIMIT = -1;
+  public static int MAX_PUNCT = -1;
+  public static int TRIPLE_STEPS = -1;
+  public static int maxTriplesperURI = -1;
+
+  public static int minSFlength = -1;
+
+  // word2ec
+  public static String word2vecKey = null;
+  public static String word2vecEndpoint = null;
+  public static double SIM_THRESHOLD = -1;
+
+  // corpus
+  public static String CORPUS_FOLDER = null;
+
+  // SOLR
+  public static String SOLR_CORE_INDEX = null;
+  public static String SOLR_CORE_SURFACEFORMS = null;
+  public static int SOLR_TIMEOUT = -1;
+  public static String SOLR_URL = null;
+  public static int SOLR_THREADS = -1;
+  public static int SOLR_QUEUE = -1;
+  public static int SOLR_ROWS = -1;
+
+  public Const(final String baseFolder) {
+    Const.baseFolder = baseFolder;
+    cfgManager = new CfgManager(baseFolder);
+    CFG = cfgManager.getCfg(Const.class);
+
+    DATA_FOLDER = CFG.getString("ocelot.dataFolder");
+    TMP_FOLDER = CFG.getString("ocelot.tmpFolder");
+    DBPEDIA_FOLDER = Const.DATA_FOLDER + File.separator + "dbpedia" + File.separator;
+
+    RELATION_DOMAIN = CFG.getString("properties.domain");
+    RELATION_RANGE = CFG.getString("properties.range");
+    RELATION_FILE = Paths.get(baseFolder).normalize().resolve(//
+        CFG.getString("properties.file")).toString();
+    RELATION_DOMAIN_PLACEHOLDER = CFG.getString("properties.domainPlaceholder");
+    RELATION_RANGE_PLACEHOLDER =
+
+        CFG.getString("properties.rangePlaceholder");
+
+    // index
+    INDEX_FIXED_THREAD_POOL_SIZE = CFG.getInt("index.threads");
+    INDEX_NLP_TIMEOUT = CFG.getInt("index.timeout");
+    sentenceLengthMin = CFG.getInt("index.sentenceLengthMin");
+    sentenceLengthMax = CFG.getInt("index.sentenceLengthMax");
+    // sfSetSizeMin = CFG.getInt("index.sfSetSizeMin");
+    // sfSetSizeMax = CFG.getInt("index.sfSetSizeMax");
+    searchThreadsSF = CFG.getInt("index.searchThreadsSF");
+    searchTimeoutSF = CFG.getInt("index.searchTimeoutSF");
+
+    // search limit of the wiki index results
+    LIMIT = getInt(CFG, "settings.limit");
+    MAX_PUNCT = CFG.getInt("settings.maxPunct");
+    TRIPLE_STEPS = getInt(CFG, "settings.tripleSteps");
+    maxTriplesperURI = getInt(CFG, "settings.maxTriples");
+
+    minSFlength = CFG.getInt("settings.minSurfaceformsLength");
+
+    // word2ec
+    word2vecKey = CFG.getString("word2vec.key");
+    word2vecEndpoint = CFG.getString("word2vec.uri");
+    SIM_THRESHOLD = CFG.getDouble("word2vec.threshold");
+
+    // corpus
+    CORPUS_FOLDER = CFG.getString("corpus.folder");
+
+    // SOLR
+    SOLR_CORE_INDEX = CFG.getString("solr.indexCore");
+    SOLR_CORE_SURFACEFORMS = CFG.getString("solr.surfaceformsCore");
+    SOLR_TIMEOUT = CFG.getInt("solr.timeout");
+    SOLR_URL = CFG.getString("solr.url");
+    SOLR_THREADS = CFG.getInt("solr.threads");
+    SOLR_QUEUE = CFG.getInt("solr.queue");
+    SOLR_ROWS = CFG.getInt("solr.rows");
+  }
+
   public static final boolean NER_USE = true;
-
-  public static final XMLConfiguration CFG = CfgManager.getCfg(Const.class);
-
   // folders
-  public static final String DATA_FOLDER = CFG.getString("ocelot.dataFolder");
-  public static final String TMP_FOLDER = CFG.getString("ocelot.tmpFolder");
-  public static final String DBPEDIA_FOLDER =
-      Const.DATA_FOLDER + File.separator + "dbpedia" + File.separator;
-
   public static final String DBPEDIA_SURFACEFORMS_FILE = "_surface_forms.tsv";
 
   // public static final String SERIALISATION_SENTENCE_CANDIDATES = "sentenceCanidates.data";
 
-  // properties
-  public static final String RELATION_DOMAIN = CFG.getString("properties.domain");
-  public static final String RELATION_RANGE = CFG.getString("properties.range");
-  public static final String RELATION_FILE = Paths.get(CFG_FOLDER).normalize().resolve(//
-      CFG.getString("properties.file")).toString();
-  public static final String RELATION_DOMAIN_PLACEHOLDER =
-      CFG.getString("properties.domainPlaceholder");
-  public static final String RELATION_RANGE_PLACEHOLDER =
-      CFG.getString("properties.rangePlaceholder");
-
   //
   public static final boolean useSurfaceforms = true;
-
-  // index
-  public static final int INDEX_FIXED_THREAD_POOL_SIZE = CFG.getInt("index.threads");
-  public static final int INDEX_NLP_TIMEOUT = CFG.getInt("index.timeout");
-  public static final int sentenceLengthMin = CFG.getInt("index.sentenceLengthMin");
-  public static final int sentenceLengthMax = CFG.getInt("index.sentenceLengthMax");
-  // public static final int sfSetSizeMin = CFG.getInt("index.sfSetSizeMin");
-  // public static final int sfSetSizeMax = CFG.getInt("index.sfSetSizeMax");
-  public static final int searchThreadsSF = CFG.getInt("index.searchThreadsSF");
-  public static final int searchTimeoutSF = CFG.getInt("index.searchTimeoutSF");
-
-  // search limit of the wiki index results
-  public static final int LIMIT = getInt("settings.limit");
-  public static final int MAX_PUNCT = CFG.getInt("settings.maxPunct");
-  public static final int TRIPLE_STEPS = getInt("settings.tripleSteps");
-  public static final int maxTriplesperURI = getInt("settings.maxTriples");
-
-  public static final int minSFlength = CFG.getInt("settings.minSurfaceformsLength");
-
-  // word2ec
-  public static final String word2vecKey = CFG.getString("word2vec.key");
-  public static final String word2vecEndpoint = CFG.getString("word2vec.uri");
-  public static final double SIM_THRESHOLD = CFG.getDouble("word2vec.threshold");
-
-  // corpus
-  public static final String CORPUS_FOLDER = CFG.getString("corpus.folder");
-
-  // SOLR
-  public static final String SOLR_CORE_INDEX = CFG.getString("solr.indexCore");
-  public static final String SOLR_CORE_SURFACEFORMS = CFG.getString("solr.surfaceformsCore");
-  public static final int SOLR_TIMEOUT = CFG.getInt("solr.timeout");
-  public static final String SOLR_URL = CFG.getString("solr.url");
-  public static final int SOLR_THREADS = CFG.getInt("solr.threads");
-  public static final int SOLR_QUEUE = CFG.getInt("solr.queue");
-  public static final int SOLR_ROWS = CFG.getInt("solr.rows");
 
   // unsorted
   // index - sfSteps sfs per thread (1 sparql request for sfSteps sfs)
@@ -94,7 +145,7 @@ public class Const {
    * @param key
    * @return
    */
-  public static int getInt(final String key) {
+  public static int getInt(final XMLConfiguration CFG, final String key) {
     return CFG.getInt(key) < 0 ? //
         Integer.MAX_VALUE : CFG.getInt(key);
   }

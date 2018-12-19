@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import org.aksw.ocelot.data.Const;
 import org.aksw.ocelot.data.kb.DBpediaStats;
 import org.aksw.ocelot.generalisation.graph.ColoredDirectedGraph;
 import org.aksw.ocelot.generalisation.graph.isomorphism.VF2SubgraphIsomorphism;
@@ -28,17 +29,23 @@ public class Application implements IOcelot {
   public final static String L = "LOCATION";
   public final static String O = "ORGANIZATION";
 
-  protected ApplicationUtil applicationUtil = new ApplicationUtil();
+  protected ApplicationUtil applicationUtil = null;
   protected Set<String> predicates = null;
 
   final protected Map<String, SimpleEntry<String, String>> uriToDomainRange = new HashMap<>();
+
+  public static Application instance(final String folder) {
+    new Const("data/ocelot/config");
+    return new Application(folder);
+  }
 
   /**
    * Reads all supported predicates from a folder.
    *
    */
-  public Application(final String folder) {
+  protected Application(final String folder) {
 
+    applicationUtil = new ApplicationUtil();
     // get all predicates
     predicates = ApplicationUtil.getAllPredicates(folder);
 
@@ -54,7 +61,7 @@ public class Application implements IOcelot {
       final SimpleEntry<String, String> k = entry.getKey();
       final Map<String, Integer> v = entry.getValue();
       for (final String uri : v.keySet()) {
-        final String u = uri.replaceAll(Pattern.quote("dbo:"), ("http://dbpedia.org/ontology/"));
+        final String u = uri.replaceAll(Pattern.quote("dbo:"), "http://dbpedia.org/ontology/");
         uriToDomainRange.put(u, replace(k));
       }
     }
@@ -72,7 +79,7 @@ public class Application implements IOcelot {
    * @return
    */
   private SimpleEntry<String, String> replace(final SimpleEntry<String, String> entry) {
-    return new SimpleEntry<String, String>(//
+    return new SimpleEntry<>(//
         entry.getKey()//
             .replaceAll(Pattern.quote("dbo:Organisation"), O) //
             .replaceAll(Pattern.quote("dbo:Place"), L) //
@@ -97,7 +104,7 @@ public class Application implements IOcelot {
 
       final SimpleEntry<String, String> dr = uriToDomainRange.get(predicate);
 
-      if ((dr != null) && dr.getKey().equals(domain) && dr.getValue().equals(range)) {
+      if (dr != null && dr.getKey().equals(domain) && dr.getValue().equals(range)) {
         final Map<ColoredDirectedGraph, Set<ColoredDirectedGraph>> generalizedTrees;
         generalizedTrees = applicationUtil.loadGeneralizedTrees(predicate);
 
