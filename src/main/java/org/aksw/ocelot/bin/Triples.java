@@ -13,11 +13,12 @@ public class Triples {
     LOG.info("Start ...");
 
     final DBpediaKB kb = new DBpediaKB();
+
     PropertiesFactory.getInstance(PropertiesFactory.file)//
         .getPredicates()//
         .parallelStream()//
         .forEach(p -> kb.getTriples(p, Const.maxTriplesperURI)//
-    );
+        );
 
     LOG.info("End ...");
   }

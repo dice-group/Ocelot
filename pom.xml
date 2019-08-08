@@ -22,8 +22,10 @@
 		<system.libs>${project.basedir}/lib</system.libs>
 		<nd4j.version>0.0.3.5.5</nd4j.version>
 		<dl4j.version>0.0.3.2.7</dl4j.version>
+		<!--  we need this old version for the BOA index -->
 		<lucene.version>4.10.0</lucene.version>
-		<stanford.version>3.6.0</stanford.version>
+		<!-- <stanford.version>3.6.0</stanford.version> -->
+		<stanford.version>3.8.0</stanford.version>
 		<maven.javadoc.skip>true</maven.javadoc.skip>
 	</properties>
 	<!-- -->
@@ -67,6 +69,13 @@
 	<!-- -->
 	<!-- -->
 	<dependencies>
+	<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-collections4</artifactId>
+    <version>4.4</version>
+</dependency>
+
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>javax.mail-api</artifactId>
@@ -121,12 +130,20 @@
 			<version>${stanford.version}</version>
 			<classifier>models</classifier>
 		</dependency>
+				<dependency>
+			<groupId>edu.stanford.nlp</groupId>
+			<artifactId>stanford-corenlp</artifactId>
+			<version>${stanford.version}</version>
+			<classifier>models-german</classifier>
+		</dependency>
+		
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
 			<artifactId>stanford-parser</artifactId>
 			<version>${stanford.version}</version>
 			<classifier>models</classifier>
 		</dependency>
+
 		<!-- test -->
 		<dependency>
 			<groupId>junit</groupId>

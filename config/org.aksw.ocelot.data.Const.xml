@@ -3,6 +3,7 @@
 <!DOCTYPE doc [
 <!ENTITY default SYSTEM "default.xml">
 <!ENTITY deploy SYSTEM "deploy.xml">
+<!ENTITY defaultDE SYSTEM "defaultDE.xml">
 <!ENTITY predicates SYSTEM "predicates/person/pp.xml">
 ]>
-<config>&deploy;</config>
+<config>&defaultDE;</config>

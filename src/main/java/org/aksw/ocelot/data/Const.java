@@ -68,9 +68,21 @@ public class Const {
   public static int SOLR_QUEUE = -1;
   public static int SOLR_ROWS = -1;
 
-  public Const(final String baseFolder) {
-    Const.baseFolder = baseFolder;
-    cfgManager = new CfgManager(baseFolder);
+  static {
+    Const.setConfigFolder(Const.baseFolder);
+  }
+
+  /**
+   *
+   * @param configFolder config folder
+   */
+  public static void setConfigFolder(final String config) {
+    new Const(config);
+  }
+
+  private Const(final String configFolder) {
+    Const.baseFolder = configFolder;
+    cfgManager = new CfgManager(configFolder);
     CFG = cfgManager.getCfg(Const.class);
 
     DATA_FOLDER = CFG.getString("ocelot.dataFolder");
@@ -79,7 +91,7 @@ public class Const {
 
     RELATION_DOMAIN = CFG.getString("properties.domain");
     RELATION_RANGE = CFG.getString("properties.range");
-    RELATION_FILE = Paths.get(baseFolder).normalize().resolve(//
+    RELATION_FILE = Paths.get(configFolder).normalize().resolve(//
         CFG.getString("properties.file")).toString();
     RELATION_DOMAIN_PLACEHOLDER = CFG.getString("properties.domainPlaceholder");
     RELATION_RANGE_PLACEHOLDER =
@@ -152,7 +164,9 @@ public class Const {
 
   // print informations
   static {
+
     LOG.info("==== Constants are loaded ====");
+    LOG.info("TMP_FOLDER: " + TMP_FOLDER);
     LOG.info("max triples per URI: " + maxTriplesperURI);
     LOG.info("min SF length: " + minSFlength);
     LOG.info("Domain: " + RELATION_DOMAIN + "(" + RELATION_DOMAIN_PLACEHOLDER + ")");

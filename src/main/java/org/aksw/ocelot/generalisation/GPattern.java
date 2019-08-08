@@ -127,8 +127,8 @@ public class GPattern {
   }
 
   /**
-   * Puts all generalized graphs in a set and ignores duplicates. At the momment the middle and
-   * right side if the store is will be lose.
+   * Puts all generalized graphs in a set and ignores duplicates. At the moment the middle and right
+   * side if the store is will be lose.
    *
    * @param stores
    * @return stores with no duplicates.

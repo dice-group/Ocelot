@@ -22,12 +22,12 @@ public class ApplicationTest {
   }
 
   /**
-   *
+   * Tests a pattern for "http://dbpedia.org/ontology/spouse" from config on a sentence.
    */
   @Test
   public void test() {
 
-    Assert.assertEquals(true, !app.getSupportedPredicates().isEmpty());
+    Assert.assertFalse(app.getSupportedPredicates().isEmpty());
 
     final String p = "http://dbpedia.org/ontology/spouse";
     if (app.getSupportedPredicates().contains(p)) {
@@ -51,6 +51,5 @@ public class ApplicationTest {
       Assert.assertEquals(1, predicates.size());
       Assert.assertTrue(predicates.contains(p));
     }
-
   }
 }

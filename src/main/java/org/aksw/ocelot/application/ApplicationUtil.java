@@ -157,13 +157,22 @@ public class ApplicationUtil {
     }
   }
 
+  /**
+   * Sends each map entry to {@link #removeSentenceEnding(ColoredDirectedGraph)}.
+   *
+   * @param map
+   */
   public void removeSentenceEnding(final Map<ColoredDirectedGraph, Set<ColoredDirectedGraph>> map) {
     for (final Entry<ColoredDirectedGraph, Set<ColoredDirectedGraph>> entry : map.entrySet()) {
       removeSentenceEnding(entry.getKey());
     }
   }
 
-  // removes sentence endings by removing the nodes and edges
+  /**
+   * removes sentence endings by removing the nodes and edges
+   *
+   * @param coloredDirectedGraph
+   */
   public void removeSentenceEnding(final ColoredDirectedGraph coloredDirectedGraph) {
 
     final Set<INode> remove = new HashSet<>();

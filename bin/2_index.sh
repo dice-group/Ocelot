@@ -1,4 +1,4 @@
-export MAVEN_OPTS="-Xmx100G"
+export MAVEN_OPTS="-Xmx10G"
 cd ..
-nohup mvn exec:java -Dexec.mainClass="org.aksw.nlp.re.ocelot.bin.Indexer" > bin/index.log &
+nohup mvn exec:java -Dexec.mainClass="org.aksw.ocelot.bin.IndexerTest" > bin/index.log &
 cd bin

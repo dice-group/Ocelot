@@ -28,14 +28,13 @@ public class GGeneralizeMain {
   // how many trees we take into account
   protected static final Integer treeLimit = Integer.MAX_VALUE;
 
+  // TODO: add to config s
   // serialization folder
   protected static String storeFolder = Const.TMP_FOLDER.concat("/ocelot/serial");
 
   private final LGGStoreUtil storeUtil = new LGGStoreUtil();
 
-  public GGeneralizeMain() {
-
-  }
+  public GGeneralizeMain() {}
 
   public GGeneralizeMain(final String storeFolder) {
     this();

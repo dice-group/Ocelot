@@ -72,12 +72,15 @@ public class WikipediaExtractor implements IDataExtractor {
           } catch (final Exception e) {
             LOG.error(e.getLocalizedMessage(), e);
             LOG.error(line);
+            continue;
           }
 
         }
-
+        if (wikidoc == null) {
+          continue;
+        }
         // short or empty line
-        if (line.isEmpty() || (line.length() < "<h1>".length())) {
+        if (line.isEmpty() || line.length() < "<h1>".length()) {
           continue;
         }
 
@@ -93,7 +96,7 @@ public class WikipediaExtractor implements IDataExtractor {
         }
 
         // headline
-        if ((line.length() > "<h*>".length())
+        if (line.length() > "<h*>".length()
             && hStrart.contains(line.substring(0, "<h*>".length()))) {
           heads.add(line.substring("<h*>".length(), line.length() - "</h*>".length()));
           newSection = true;

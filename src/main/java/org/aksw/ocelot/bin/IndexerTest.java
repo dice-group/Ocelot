@@ -13,10 +13,12 @@ public class IndexerTest {
   protected final static Logger LOG = LogManager.getLogger(IndexerTest.class);
 
   public static void main(final String[] args) {
-    LOG.info("Start ...");
+    LOG.info("Start creating index...");
 
-    final Indexer indexer = new Indexer();
-    LOG.info("Read files ...");
+    LOG.info("GEMRAN");
+    final Indexer indexer = new Indexer("de");
+
+    LOG.info("Reads files in " + Const.CORPUS_FOLDER + "...");
 
     final Set<Path> files = FileUtil.filesInFolderSave(Const.CORPUS_FOLDER);
     LOG.info("# files: " + files.size());

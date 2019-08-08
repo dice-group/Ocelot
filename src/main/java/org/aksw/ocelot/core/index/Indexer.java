@@ -53,12 +53,14 @@ public class Indexer {
 
   protected final IIndex index;
   protected final IDataExtractor wikipediaExtractor;
+  String lang = "";
 
   /**
    * Initializes a {@link SolrIndex} instance as {@link IIndex} and a {@link WikipediaExtractor}
    * instance as {@link IDataExtractor}.
    */
-  public Indexer() {
+  public Indexer(final String lang) {
+    this.lang = lang;
     index = new SolrIndex();
     wikipediaExtractor = new WikipediaExtractor();
   }
@@ -68,25 +70,34 @@ public class Indexer {
    *
    * @return StanfordCoreNLP instance
    */
-  protected StanfordCoreNLP getPipe() {
-    final Properties props = new Properties();
-    // props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner, parse, dcoref");
-    props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner");
-    props.setProperty("tokenize.language", "en");
-    props.setProperty("ner.applyNumericClassifiers", "false");
-    props.setProperty("ner.useSUTime", "false");
-    // props.setProperty("ner.applyNumericClassifiers", "true"); // en only
-    // props.setProperty("ner.useSUTime", "true");
-    // props.setProperty("sutime.markTimeRanges", "true");
-    // props.setProperty("ner.model","edu/stanford/nlp/models/ner/english.all.3class.distsim.crf.ser.gz");
-    props.setProperty("ner.model",
-        "edu/stanford/nlp/models/ner/english.muc.7class.distsim.crf.ser.gz");
-    // props.setProperty("dcoref.score", "false");
-    // props.setProperty("dcoref.big.gender.number","edu/stanford/nlp/models/dcoref/gender.map.ser.gz");
-    // props.setProperty("dcoref.use.big.gender.number", "true");
-    // props.setProperty("dcoref.maxdist", "-1");
-    // props.setProperty("dcoref.postprocessing", "true");
-    return new StanfordCoreNLP(props);
+  StanfordCoreNLP instance = null;
+
+  protected StanfordCoreNLP getPipe(final String lang) {
+    if (instance == null) {
+      final Properties props = new Properties();
+      if (lang.toLowerCase().endsWith("en")) {
+        // en
+        props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner");
+        props.setProperty("tokenize.language", "en");
+        props.setProperty("ner.applyNumericClassifiers", "false");
+        props.setProperty("ner.useSUTime", "false");
+        props.setProperty("ner.model",
+            "edu/stanford/nlp/models/ner/english.muc.7class.distsim.crf.ser.gz");
+      }
+      if (lang.toLowerCase().endsWith("de")) {
+        // de
+        // no lemma yet
+        props.put("annotators", "tokenize, ssplit, pos, ner");
+        props.put("tokenize.language", "de");
+        props.put("pos.model", "edu/stanford/nlp/models/pos-tagger/german/german-hgc.tagger");
+        props.put("ner.model", "edu/stanford/nlp/models/ner/german.conll.hgc_175m_600.crf.ser.gz");
+        props.put("ner.applyNumericClassifiers", "false");
+        props.put("ner.applyFineGrained", "false");
+        props.put("ner.useSUTime", "false");
+      }
+      instance = new StanfordCoreNLP(props);
+    }
+    return instance;
   }
 
   /**
@@ -99,7 +110,6 @@ public class Indexer {
 
       final List<WikiDoc> wikidocs = wikipediaExtractor.call(FileUtil.getBufferedReader(file));
       LOG.info("Wikidocs size: " + wikidocs.size());
-
       createIndex(wikidocs);
     }
   }
@@ -189,7 +199,7 @@ public class Indexer {
   protected Map<SimpleEntry<Integer, Integer>, SimpleEntry<String, Map<String, List<Object>>>> annotations(
       final Map<Integer, String> sections) {
 
-    final StanfordCoreNLP pipe = getPipe();
+    final StanfordCoreNLP pipe = getPipe(lang);
     int sentenceNr = 1;
 
     // stores sentence num and section num -> sentences and annotations

@@ -35,7 +35,7 @@ public class Application implements IOcelot {
   final protected Map<String, SimpleEntry<String, String>> uriToDomainRange = new HashMap<>();
 
   public static Application instance(final String folder) {
-    new Const("data/ocelot/config");
+    Const.setConfigFolder("data/ocelot/config");
     return new Application(folder);
   }
 
