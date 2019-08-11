@@ -232,13 +232,16 @@ public class Indexer {
             // we remember sentences with at least one NE
             // boolean hasEntities = false;
             for (final CoreLabel token : sentence.get(TokensAnnotation.class)) {
-              annos.get(name(TokensAnnotation.class)).add(token.originalText());
-              annos.get(name(PartOfSpeechAnnotation.class))
+              annos.get(name(TokensAnnotation.class))//
+                  .add(token.originalText());
+              annos.get(name(PartOfSpeechAnnotation.class))//
                   .add(token.getString(PartOfSpeechAnnotation.class));
-              annos.get(name(NamedEntityTagAnnotation.class))
+              annos.get(name(NamedEntityTagAnnotation.class))//
                   .add(token.get(NamedEntityTagAnnotation.class));
-              annos.get(name(LemmaAnnotation.class)).add(token.getString(LemmaAnnotation.class));
-              annos.get(name(IndexAnnotation.class)).add(token.beginPosition());
+              annos.get(name(LemmaAnnotation.class))//
+                  .add(token.getString(LemmaAnnotation.class));
+              annos.get(name(IndexAnnotation.class))//
+                  .add(token.beginPosition());
 
               // if (!token.get(NamedEntityTagAnnotation.class).equals(StanfordPipeExtended.NO_NER))
               // {
@@ -320,7 +323,11 @@ public class Indexer {
     doc.addField(EnumSolrWikiIndex.TOKEN.getName(), CollectionUtil.objectsToString(token));
     doc.addField(EnumSolrWikiIndex.NER.getName(), CollectionUtil.objectsToString(ner));
     doc.addField(EnumSolrWikiIndex.TOKENNER.getName(), CollectionUtil.objectsToString(tokenNER));
-    doc.addField(EnumSolrWikiIndex.LEMMA.getName(), CollectionUtil.objectsToString(lemma));
+    // GERMAN fix, since we don't have a lemmatizer yet.
+
+    final String lemmaStr = CollectionUtil.objectsToString(lemma);
+
+    doc.addField(EnumSolrWikiIndex.LEMMA.getName(), lemmaStr.isEmpty() ? token : lemmaStr);
     doc.addField(EnumSolrWikiIndex.POS.getName(), CollectionUtil.objectsToString(pos));
     doc.addField(EnumSolrWikiIndex.INDEX.getName(), CollectionUtil.objectsToString(index));
     return doc;
