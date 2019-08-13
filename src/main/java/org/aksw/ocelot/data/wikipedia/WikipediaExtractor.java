@@ -87,7 +87,7 @@ public class WikipediaExtractor implements IDataExtractor {
         // lists
         final String liS = "<li>";
         final String liE = "</li>";
-        if (line.startsWith(liS)) {
+        if (line.startsWith(liS) && line.length() > liE.length()) {
           line = line.substring(liS.length(), line.length() - liE.length());
           if (!(line.endsWith(".") || line.endsWith("!") || line.endsWith("?"))) {
             continue;
