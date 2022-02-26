@@ -23,7 +23,7 @@
 		<nd4j.version>0.0.3.5.5</nd4j.version>
 		<dl4j.version>0.0.3.2.7</dl4j.version>
 		<lucene.version>4.10.0</lucene.version>
-		<stanford.version>3.6.0</stanford.version>
+		<stanford.version>4.4.0</stanford.version>
 		<maven.javadoc.skip>true</maven.javadoc.skip>
 	</properties>
 	<!-- -->
